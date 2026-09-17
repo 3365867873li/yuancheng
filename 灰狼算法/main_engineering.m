@@ -5,7 +5,7 @@ clear; clc; close all;   % 清空变量、命令行、关闭旧图窗
 % 也可写成元胞数组同时选多个，例如：{'spring','vessel'}
 PROBLEM_SELECT = 'spring';   % <<< 只需修改这一行即可控制运行哪个问题
 
-USE_MENU = false;            % <<< 设为 true 则弹出菜单让你交互勾选（支持多选）
+USE_MENU = true;            % <<< 设为 true 则弹出菜单让你交互勾选（支持多选）
                              %     设为 true 时，上面的 PROBLEM_SELECT 被忽略
 
 %% ==================== 参数设置(与论文一致) ====================
