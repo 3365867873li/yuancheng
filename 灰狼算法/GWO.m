@@ -1,4 +1,4 @@
-function [Alpha_score, Alpha_pos, Convergence_curve] = GWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj)
+function [Alpha_score, Alpha_pos, Convergence_curve, Alpha_pos_hist] = GWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj)
 % GWO 灰狼优化算法主函数
 % 输入：SearchAgents_no 种群规模(狼群数量)；Max_iter 最大迭代次数
 %       lb/ub 变量上下界；dim 变量维度；fobj 目标函数句柄
@@ -18,6 +18,8 @@ Positions = initialization(SearchAgents_no, dim, ub, lb);
 
 % 预分配收敛曲线数组，用于记录每次迭代的最优适应度
 Convergence_curve = zeros(1, Max_iter);
+% 预分配逐代最优位置记录（可选输出），用于回溯各分项指标的变化
+Alpha_pos_hist = zeros(Max_iter, dim);
 
 % ===================== 主迭代循环 =====================
 for l = 1:Max_iter
@@ -73,7 +75,8 @@ for l = 1:Max_iter
         end
     end
 
-    % 记录本次迭代的全局最优适应度
+    % 记录本次迭代的全局最优适应度与最优位置
     Convergence_curve(l) = Alpha_score;
+    Alpha_pos_hist(l, :) = Alpha_pos;
 end
 end
