@@ -1,10 +1,10 @@
 clear; clc; close all;   % 清理环境
 
-% ---------------- 参数设置 ----------------
-SearchAgents_no = 30;    % 狼群规模
+% ---------------- 参数设置（与论文一致） ----------------
+SearchAgents_no = 30;    % 种群规模（论文：鲸鱼/狼群混合）
 Max_iter = 500;          % 最大迭代次数
-runs = 30;               % 独立运行次数
-Functions = 1:13;        % 测试 F1 到 F13
+runs = 30;               % 独立运行次数（用于统计鲁棒性）
+Functions = 1:13;        % 测试 F1 到 F13（F1-F7 单峰测开发，F8-F13 多峰测探索）
 
 % 预分配统计结果数组
 best_all  = zeros(1, numel(Functions));
@@ -21,7 +21,7 @@ for i = 1:numel(Functions)
     curves = zeros(runs, Max_iter);   % 每次运行的收敛曲线
 
     for r = 1:runs
-        [s, ~, conv] = GWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj);
+        [s, ~, conv] = WOAGWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj);
         scores(r) = s;                % 记录本次最优值
         curves(r, :) = conv;          % 记录收敛曲线
     end
