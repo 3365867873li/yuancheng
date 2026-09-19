@@ -21,7 +21,7 @@ for i = 1:numel(Functions)
     curves = zeros(runs, Max_iter);   % 每次运行的收敛曲线
 
     for r = 1:runs
-        [s, ~, conv] = GWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj);
+        [s, ~, conv] = IGWO(SearchAgents_no, Max_iter, lb, ub, dim, fobj);
         scores(r) = s;                % 记录本次最优值
         curves(r, :) = conv;          % 记录收敛曲线
     end
